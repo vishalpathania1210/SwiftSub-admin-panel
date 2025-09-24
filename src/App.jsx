@@ -1,6 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import LoginPage from "./Pages/LoginPage";
+import ForgotPassword from "./Pages/ForgotPassword";
+import VerifyOtp from "./Pages/VerifyOtp";
+import ResetPassword from "./Pages/ResetPassword";
  
 
  const App = () => {
@@ -10,7 +13,10 @@ import LoginPage from "./Pages/LoginPage";
   <Router>
       <Routes>
         <Route path="/" element={<LoginPage />} />
-        <Route path="/login" element={<LoginPage />} />    
+         <Route path="/login" element={<LoginPage />} />    
+          <Route path="/ForgotPassword" element={<ForgotPassword />} />  
+           <Route path="/VerifyOtp" element={<VerifyOtp />} /> 
+             <Route path="/ResetPassword" element={<ResetPassword />} /> 
       </Routes>
     </Router>
     </>

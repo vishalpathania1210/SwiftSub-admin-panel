@@ -4,22 +4,28 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Eye, EyeOff } from "lucide-react";
 import Background from "../Components/Background";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
 
   const formik = useFormik({
-    initialValues: { username: "", password: "" },
+    initialValues: {
+       email: "",
+       password: ""
+       },
     validationSchema: Yup.object({
-      username: Yup.string().required("Username is required"),
+      email: Yup.string().required("Email is required"),
       password: Yup.string().required("Password is required"),
     }),
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       setLoading(true);
       console.log("Form Submitted:", values);
       // simulate async
-      setTimeout(() => setLoading(false), 800);
+      setTimeout(() => {setLoading(false), resetForm(), toast.success('Login successful')} , 800);
     },
   });
 
@@ -50,18 +56,18 @@ const LoginPage = () => {
             <form className="space-y-5" onSubmit={formik.handleSubmit}>
               {/* Username */}
               <div>
-                <label className="block text-gray-700 mb-1">Username</label>
+                <label className="block text-gray-700 mb-1">Email</label>
                 <input
                   type="text"
-                  name="username"
-                  placeholder="Username"
+                  name="email"
+                  placeholder="email"
                   className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 outline-none"
-                  value={formik.values.username}
+                  value={formik.values.email}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
-                {formik.touched.username && formik.errors.username ? (
-                  <p className="text-red-500 text-sm mt-1">{formik.errors.username}</p>
+                {formik.touched.email && formik.errors.email ? (
+                  <p className="text-red-500 text-sm mt-1">{formik.errors.email}</p>
                 ) : null}
               </div>
 
@@ -94,9 +100,11 @@ const LoginPage = () => {
               {/* Forgot Password */}
               <div className="flex items-center justify-between text-sm">
                 <div /> {/* keep space on left so layout matches original */}
-                <a href="#" className="text-indigo-500 hover:underline">
+                <button 
+                onClick={()=>navigate('/ForgotPassword')}
+                className="text-indigo-500 hover:underline">
                   Forgot Password?
-                </a>
+                </button>
               </div>
 
               {/* Login Button */}
