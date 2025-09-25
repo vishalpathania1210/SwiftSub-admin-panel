@@ -25,7 +25,7 @@ const LoginPage = () => {
       setLoading(true);
       console.log("Form Submitted:", values);
       // simulate async
-      setTimeout(() => {setLoading(false), resetForm(), toast.success('Login successful')} , 800);
+      setTimeout(() => {setLoading(false), resetForm(), toast.success('Login successful'), navigate('/Dashboard')} , 800);
     },
   });
 
@@ -101,6 +101,7 @@ const LoginPage = () => {
               <div className="flex items-center justify-between text-sm">
                 <div /> {/* keep space on left so layout matches original */}
                 <button 
+                type="button"
                 onClick={()=>navigate('/ForgotPassword')}
                 className="text-indigo-500 hover:underline">
                   Forgot Password?
