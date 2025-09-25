@@ -4,6 +4,7 @@ import LoginPage from "./Pages/LoginPage";
 import ForgotPassword from "./Pages/ForgotPassword";
 import VerifyOtp from "./Pages/VerifyOtp";
 import ResetPassword from "./Pages/ResetPassword";
+import Dashboard from "./Pages/Dashboard";
  
 
  const App = () => {
@@ -17,6 +18,7 @@ import ResetPassword from "./Pages/ResetPassword";
           <Route path="/ForgotPassword" element={<ForgotPassword />} />  
            <Route path="/VerifyOtp" element={<VerifyOtp />} /> 
              <Route path="/ResetPassword" element={<ResetPassword />} /> 
+              <Route path="/Dashboard" element={<Dashboard />} /> 
       </Routes>
     </Router>
     </>
