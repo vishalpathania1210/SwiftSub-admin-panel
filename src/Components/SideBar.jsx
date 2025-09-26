@@ -5,26 +5,13 @@ import { toast } from "react-toastify";
 
 const SideBar = () => {
   const [open, setOpen] = useState(true);
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
-  const [loading, setLoading] = useState(false); // ✅ FIX: Added loading state
-  const navigate = useNavigate();
 
   const menus = [
     { name: "Dashboard", icon: <Home size={20} />, link: "/Dashboard" },
     { name: "Users", icon: <Users size={20} />, link: "/users" },
     { name: "Settings", icon: <Settings size={20} />, link: "/settings" },
-    { name: "Logout", icon: <LogOut size={20} /> },
   ];
 
-  const handleConfirmLogout = () => {
-    setLoading(true);
-    setTimeout(() => {
-      localStorage.removeItem("authToken"); // clear token
-      setLoading(false);
-      navigate("/login");
-      toast.success('You are logged out')
-    }, 800); // simulate async logout
-  };
 
   return (
     <>
@@ -86,37 +73,7 @@ const SideBar = () => {
       </div>
 
       {/* Logout Confirmation Modal */}
-      {showLogoutModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 p-4">
-          <div className="bg-white text-black w-full max-w-sm sm:max-w-md rounded-xl shadow-xl p-6 space-y-4">
-            <h2 className="text-xl font-bold text-center text-red-500">
-              Confirm Logout
-            </h2>
-            <p className="text-center text-black">
-              Are you sure you want to log out?
-            </p>
-            <div className="flex justify-center gap-4 pt-2 flex-wrap">
-              <button
-                onClick={() => setShowLogoutModal(false)}
-                className="px-5 py-2 bg-gray-400 hover:bg-gray-500 rounded-md active:scale-95 transition shadow-md duration-200"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleConfirmLogout}
-                disabled={loading}
-                className="px-5 py-2 bg-red-500 hover:bg-red-600 rounded-md active:scale-95 transition shadow-md duration-200 flex items-center justify-center"
-              >
-                {loading ? (
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                ) : (
-                  "Logout"
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+   
     </>
   );
 };
