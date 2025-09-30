@@ -6,6 +6,7 @@ import { Eye, EyeOff } from "lucide-react";
 import Background from "../Components/Background";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -21,11 +22,37 @@ const LoginPage = () => {
       email: Yup.string().required("Email is required"),
       password: Yup.string().required("Password is required"),
     }),
-    onSubmit: (values, { resetForm }) => {
+    onSubmit: async (values, { resetForm }) => {
       setLoading(true);
-      console.log("Form Submitted:", values);
-      // simulate async
-      setTimeout(() => {setLoading(false), resetForm(), toast.success('Login successful'), navigate('/Dashboard')} , 800);
+      try {
+        const response = await axios.post(
+          "https://swift-sub-woad.vercel.app/v1/auth/login",
+          {
+            email: values.email,
+            password: values.password,  
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+  
+        console.log("API Response:", response.data);     
+          localStorage.setItem("accessToken", response.data.tokens.access.token);
+          localStorage.setItem("refreshToken", response.data.tokens.refresh.token);
+          localStorage.setItem("User", JSON.stringify(response.data.user))
+        
+  
+        toast.success("Login successful");
+        resetForm();
+        navigate("/Dashboard");
+      } catch (error) {
+        console.error("Login failed:", error.response?.data || error.message);
+        toast.error(error.response?.data?.message || "Invalid credentials");
+      } finally {
+        setLoading(false);
+      }
     },
   });
 
