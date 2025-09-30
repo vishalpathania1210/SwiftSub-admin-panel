@@ -5,7 +5,7 @@ import ForgotPassword from "./Pages/ForgotPassword";
 import VerifyOtp from "./Pages/VerifyOtp";
 import ResetPassword from "./Pages/ResetPassword";
 import Dashboard from "./Pages/Dashboard";
-import Profile from "./Pages/Profile";
+// import Profile from "./Pages/Profile";
  
 
  const App = () => {
