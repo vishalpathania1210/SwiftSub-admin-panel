@@ -5,25 +5,24 @@ import ForgotPassword from "./Pages/ForgotPassword";
 import VerifyOtp from "./Pages/VerifyOtp";
 import ResetPassword from "./Pages/ResetPassword";
 import Dashboard from "./Pages/Dashboard";
-// import Profile from "./Pages/Profile";
- 
-
- const App = () => {
+import Profile from "./Pages/Profile";
+// jkshdguirdfb gv
+const App = () => {
   return (
     <>
-         <ToastContainer position='top-center' />
-  <Router>
-      <Routes>
-        <Route path="/" element={<LoginPage />} />
-         <Route path="/login" element={<LoginPage />} />    
-          <Route path="/ForgotPassword" element={<ForgotPassword />} />  
-           <Route path="/VerifyOtp" element={<VerifyOtp />} /> 
-             <Route path="/ResetPassword" element={<ResetPassword />} /> 
-              <Route path="/Dashboard" element={<Dashboard />} /> 
-              <Route path="/Profile" element={<Profile />} /> 
-      </Routes>
-    </Router>
+      <ToastContainer position="top-center" />
+      <Router>
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/ForgotPassword" element={<ForgotPassword />} />
+          <Route path="/VerifyOtp" element={<VerifyOtp />} />
+          <Route path="/ResetPassword" element={<ResetPassword />} />
+          <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/Profile" element={<Profile />} />
+        </Routes>
+      </Router>
     </>
-  )
-}
-export default App
+  );
+};
+export default App;
