@@ -18,7 +18,7 @@ const NavBar = ({ title }) => {
     if (storedUser) {
       try {
         const parsedUser = JSON.parse(storedUser);
-        console.log(storedUser)
+        console.log(storedUser);
         setUser(parsedUser);
         console.log("User from localStorage:", parsedUser);
       } catch (error) {
@@ -43,7 +43,7 @@ const NavBar = ({ title }) => {
     setLoading(true);
 
     try {
-      const token = localStorage.getItem("refreshToken"); 
+      const token = localStorage.getItem("refreshToken");
 
       const response = await axios.post(
         "https://swift-sub-woad.vercel.app/v1/auth/forgot-password",
@@ -73,7 +73,6 @@ const NavBar = ({ title }) => {
     }
   };
 
-
   return (
     <nav className="w-full bg-white shadow px-4 py-3 flex justify-between items-center relative">
       <h2 className="text-2xl font-bold">{title}</h2>
@@ -83,7 +82,7 @@ const NavBar = ({ title }) => {
         {/* Avatar button */}
         <div className="relative" ref={dropdownRef}>
           <button
-          type="button"
+            type="button"
             onClick={() => setOpen(!open)}
             className="w-9 h-9 rounded-full bg-indigo-500 flex items-center justify-center text-white font-bold cursor-pointer select-none transition active:scale-95 duration-300"
           >
@@ -94,28 +93,31 @@ const NavBar = ({ title }) => {
           {open && (
             <div className="absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg py-2 z-50">
               <button
-              type="button"
-              onClick={()=>navigate('/Profile')}
-              className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 transition active:scale-95 duration-300">
+                type="button"
+                onClick={() => navigate("/Profile")}
+                className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 transition active:scale-95 duration-300"
+              >
                 Profile
               </button>
-              <button 
-              type="button"
-              onClick={ ()=>navigate('/ForgotPassword')}
-              className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 transition active:scale-95 duration-300 ">
+              <button
+                type="button"
+                onClick={() => navigate("/ForgotPassword")}
+                className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 transition active:scale-95 duration-300 "
+              >
                 Forgot Password
               </button>
-              <button 
-              type="button"
-              onClick={()=>setShowLogoutModal(true)}
-              className="block w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 transition active:scale-95 duration-300">
+              <button
+                type="button"
+                onClick={() => setShowLogoutModal(true)}
+                className="block w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 transition active:scale-95 duration-300"
+              >
                 Log Out
               </button>
             </div>
           )}
         </div>
       </div>
-         {showLogoutModal && (
+      {showLogoutModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 p-4">
           <div className="bg-white text-black w-full max-w-sm sm:max-w-md rounded-xl shadow-xl p-6 space-y-4">
             <h2 className="text-xl font-bold text-center text-red-500">
