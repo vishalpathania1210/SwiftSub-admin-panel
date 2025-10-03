@@ -34,22 +34,22 @@ const LoginPage = () => {
           {
             headers: {
               "Content-Type": "application/json",
-            },
-          }
+            }
+          },
         );
   
         console.log("API Response:", response.data);     
           localStorage.setItem("accessToken", response.data.tokens.access.token);
           localStorage.setItem("refreshToken", response.data.tokens.refresh.token);
           localStorage.setItem("User", JSON.stringify(response.data.user))
-        
-  
+         
         toast.success("Login successful");
         resetForm();
         navigate("/Dashboard");
       } catch (error) {
         console.error("Login failed:", error.response?.data || error.message);
         toast.error(error.response?.data?.message || "Invalid credentials");
+        resetForm();
       } finally {
         setLoading(false);
       }

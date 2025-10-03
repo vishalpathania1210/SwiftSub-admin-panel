@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { Bell } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const NavBar = ({ title }) => {
   const [open, setOpen] = useState(false);
@@ -10,7 +11,21 @@ const NavBar = ({ title }) => {
   const navigate = useNavigate();
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem("User");
+    if (storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        console.log(storedUser)
+        setUser(parsedUser);
+        console.log("User from localStorage:", parsedUser);
+      } catch (error) {
+        console.error("Failed to parse user:", error);
+      }
+    }
+  }, []);
   // Close dropdown if clicked outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -24,14 +39,38 @@ const NavBar = ({ title }) => {
     };
   }, []);
 
-    const handleConfirmLogout = () => {
+  const handleConfirmLogout = async () => {
     setLoading(true);
-    setTimeout(() => {
-      localStorage.removeItem("authToken"); // clear token
-      setLoading(false);
+
+    try {
+      const token = localStorage.getItem("refreshToken"); 
+
+      const response = await axios.post(
+        "https://swift-sub-woad.vercel.app/v1/auth/forgot-password",
+        {
+          email: user?.email, // you can also fetch from user state
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("Logout response:", response.data);
+
+      // clear token and redirect
+      localStorage.removeItem("authToken");
+      toast.success("You are logged out");
       navigate("/login");
-      toast.success('You are logged out')
-    }, 800); // simulate async logout
+    } catch (error) {
+      console.error("Logout API error:", error);
+      toast.error("Logout failed");
+    } finally {
+      setLoading(false);
+      setShowLogoutModal(false);
+    }
   };
 
 

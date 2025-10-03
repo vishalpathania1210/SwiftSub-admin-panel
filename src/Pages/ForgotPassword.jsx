@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import Background from "../Components/Background";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const ForgotPassword = () => {
   const [loading, setLoading] = useState(false);
@@ -16,13 +17,34 @@ const ForgotPassword = () => {
     validationSchema: Yup.object({
       email: Yup.string().required("email is required"),
     }),
-    onSubmit: (values, { resetForm }) => {
+    onSubmit:async (values, { resetForm }) => {
       setLoading(true);
-      console.log("Form Submitted:", values);
-      // simulate async
-      setTimeout(() => {setLoading(false), resetForm(), navigate('/VerifyOtp'), toast.success('Otp sent successfully')}, 800);
-    },
-  });
+      try {
+        const response = await axios.post("https://swift-sub-woad.vercel.app/v1/auth/forgot-password",
+        {
+          email: values.email
+        },
+        {
+          headers:{
+            "Content-Type":"application/json",
+          }
+        },
+        );
+        console.log('forgot password api response ',response.data)
+        if (response.data.success == true) {
+        localStorage.setItem('forgot-password-token',response.data.token)
+toast.success(response.data.message)
+resetForm()
+setLoading(false)
+navigate('/VerifyOtp')
+        }
+      } catch (error) {
+        console.log('api not working ',error)
+        setLoading(false)
+        resetForm()
+        toast.error("something went wrong")
+      }
+}});
 
   return (
     <Background>
