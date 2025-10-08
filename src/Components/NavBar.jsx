@@ -12,15 +12,22 @@ const NavBar = ({ title }) => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
+  const [tokenn, setTokenn] = useState(null)
+  const [accessToken, setAccessToken] = useState(null)
+
 
   useEffect(() => {
     const storedUser = localStorage.getItem("User");
     if (storedUser) {
       try {
         const parsedUser = JSON.parse(storedUser);
-        console.log(storedUser);
         setUser(parsedUser);
         console.log("User from localStorage:", parsedUser);
+        const token = localStorage.getItem("refreshToken");
+        setTokenn(token)
+        const secondToken = localStorage.getItem("accessToken")
+        console.log("checking access token",secondToken)
+        setAccessToken(accessToken)
       } catch (error) {
         console.error("Failed to parse user:", error);
       }
@@ -43,16 +50,16 @@ const NavBar = ({ title }) => {
     setLoading(true);
 
     try {
-      const token = localStorage.getItem("refreshToken");
-
       const response = await axios.post(
-        "https://swift-sub-woad.vercel.app/v1/auth/forgot-password",
+        "https://swift-sub-woad.vercel.app/v1/auth/logout",
         {
-          email: user?.email, // you can also fetch from user state
+          email: user?.email,
+          refreshToken: tokenn
+          // you can also fetch from user state
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${accessToken}`,
             "Content-Type": "application/json",
           },
         }
@@ -61,7 +68,7 @@ const NavBar = ({ title }) => {
       console.log("Logout response:", response.data);
 
       // clear token and redirect
-      localStorage.removeItem("authToken");
+      localStorage.clear();
       toast.success("You are logged out");
       navigate("/login");
     } catch (error) {

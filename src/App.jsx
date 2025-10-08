@@ -6,6 +6,7 @@ import VerifyOtp from "./Pages/VerifyOtp";
 import ResetPassword from "./Pages/ResetPassword";
 import Dashboard from "./Pages/Dashboard";
 import Profile from "./Pages/Profile";
+import Users from "./Pages/Users";
 // jkshdguirdfb gvawrfs
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="/ResetPassword" element={<ResetPassword />} />
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Profile" element={<Profile />} />
+          <Route path="/users" element={<Users />} />
         </Routes>
       </Router>
     </>

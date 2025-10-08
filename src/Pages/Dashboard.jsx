@@ -8,7 +8,7 @@ export default function Dashboard() {
   return (
     <div className="flex">
       <SideBar />
-      <div className="flex-1">
+      <div className="flex-1 p-6">
         <NavBar title='Dashboard' />
 
         {/* Dashboard Content */}

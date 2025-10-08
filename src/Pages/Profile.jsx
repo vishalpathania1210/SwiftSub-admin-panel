@@ -1,7 +1,9 @@
 // src/pages/AdminProfile.jsx
+import { useSelector } from "react-redux";
 import NavBar from "../Components/NavBar";
 import SideBar from "../Components/SideBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Profile = () => {
   const [formData] = useState({
@@ -10,6 +12,23 @@ const Profile = () => {
     role: "Super Admin",
     phone: "+91 9876543210",
   });
+  const userData = useSelector((state)=> state.user.user)
+
+
+const profile = async() =>{
+try {
+  const response = await axios.get("https://swift-sub-woad.vercel.app/v1/adminProfile",
+  {
+params : { id: userData.id }
+  }
+  )
+  console.log("profile api response ", response.data)
+} catch (error) {
+  console.log('profile api error ', error)
+}
+} 
+
+useEffect(()=>{profile()},[])
 
   return (
     <div className="flex">

@@ -1,16 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Background from "../Components/Background";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const ResetPassword = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const navigate = useNavigate();
+  const [forgotToken, setForgotToken] = useState()
+
+  useEffect(()=>{
+const token = localStorage.getItem("forgot-password-token")
+console.log("forgot token", token)
+setForgotToken(token)
+  },[])
 
   const formik = useFormik({
     initialValues: {
@@ -25,17 +33,37 @@ const ResetPassword = () => {
         .required("Confirm your password")
         .oneOf([Yup.ref("password"), null], "Passwords must match"),
     }),
-    onSubmit: (values, { resetForm }) => {
+    onSubmit: async (values, { resetForm }) => {
       setLoading(true);
-      console.log("Password Reset:", values);
+      try {
+        const response = await axios.post(
+          `https://swift-sub-woad.vercel.app/v1/auth/reset-password?token=${forgotToken}`,
+          {
+            password: values.password,
+            confirmNewPassword: values.confirmPassword,
+          }, // body data
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
-      // simulate async
-      setTimeout(() => {
+        if (response.data.success) {
+          toast.success("Password reset successfully, Please Login.");
+          resetForm();
+          localStorage.removeItem("forgot-password-token")
+          navigate("/login");
+
+        } else {
+          toast.error(response.data.message || "Something went wrong!");
+        }
+      } catch (error) {
+        console.error(error);
+        toast.error(error.response?.data?.message || "Reset failed");
+      } finally {
         setLoading(false);
-        resetForm();
-        navigate("/login");
-        toast.success('Password reseted successfully, Please Login.')
-      }, 1000);
+      }
     },
   });
 
@@ -55,9 +83,7 @@ const ResetPassword = () => {
           <form onSubmit={formik.handleSubmit} className="space-y-5">
             {/* New Password */}
             <div>
-              <label
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
+              <label className="block text-sm font-medium text-gray-700 mb-1">
                 New Password
               </label>
               <div className="relative">
@@ -92,9 +118,7 @@ const ResetPassword = () => {
 
             {/* Confirm Password */}
             <div>
-              <label
-                className="block text-sm font-medium text-gray-700 mb-1"
-              >
+              <label className="block text-sm font-medium text-gray-700 mb-1">
                 Confirm Password
               </label>
               <div className="relative">
