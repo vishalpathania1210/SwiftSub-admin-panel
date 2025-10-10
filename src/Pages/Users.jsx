@@ -24,63 +24,38 @@ const Users = () => {
       console.error("No token found");
       return;
     }
-  
     setLoading(true);
-    setError(null); // ✅ Reset error every time you search
-  
     try {
+      let response;
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       };
-  
-      let response;
       if (searchQuery.trim()) {
         response = await axios.get(
           `https://swift-sub-woad.vercel.app/v1/admin/searchUser?query=${searchQuery}`,
           config
-        );
+        )
       } else {
         response = await axios.get(
           "https://swift-sub-woad.vercel.app/v1/admin/getUserList",
           config
         );
       }
-  
-      // ✅ Defensive check
-      const resData = response.data;
-      let data = [];
-  
-      if (Array.isArray(resData.users)) {
-        data = resData.users;
-      } else if (Array.isArray(resData.data)) {
-        data = resData.data;
-      } else if (Array.isArray(resData)) {
-        data = resData;
-      } else if (resData.user) {
-        // sometimes single user object returned
-        data = [resData.user];
-      } else {
-        data = [];
-      }
-  
+
+      let data = response.data.users || response.data.data || response.data || [];
+      console.log("users fetching ",data)
+      if (!Array.isArray(data)) data = [data];
+
       setUsers(data);
     } catch (err) {
-      console.error("Error fetching users:", err.response?.data || err.message);
-  
-      // ✅ Handle when API gives 404 or custom message
-      if (err.response?.status === 404 || err.response?.data?.message?.includes("not found")) {
-        setUsers([]); // show "No users found"
-        setError(null); // not a real error
-      } else {
-        setError(err);
-      }
+      console.error(err);
+      setError(err);
     } finally {
       setLoading(false);
     }
   };
-  
 
   useEffect(() => {
     fetchUsers();
@@ -90,10 +65,9 @@ const Users = () => {
     const delay = setTimeout(() => {
       fetchUsers();
     }, 500);
-  
     return () => clearTimeout(delay);
   }, [searchQuery]);
-  
+
   // Delete user
   const confirmDeleteUser = (id) => setDeleteConfirmId(id);
 
