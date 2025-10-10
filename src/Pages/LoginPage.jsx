@@ -67,7 +67,7 @@ const LoginPage = () => {
           <div className="w-full bg-indigo-900 text-white p-6 rounded-t-2xl md:rounded-tl-2xl md:rounded-tr-none">
             <div className="flex flex-col md:flex-row md:items-center md:space-x-4 gap-3">
               {/* Logo box (white inside dark band) */}
-              <div className="flex items-center justify-center w-20 h-12 rounded-xl bg-white">
+              <div className="flex items-center justify-center w-24 h-12 rounded-xl bg-white">
                 <span className="text-indigo-900 font-bold text-lg">Swiftsub</span>
               </div>
 
