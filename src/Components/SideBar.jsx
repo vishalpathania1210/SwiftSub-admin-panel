@@ -35,7 +35,7 @@ const SideBar = () => {
               !open && "scale-0"
             } duration-200`}
           >
-            ADMIN
+            Swiftsub
           </h1>
 
           <ul className="space-y-4">

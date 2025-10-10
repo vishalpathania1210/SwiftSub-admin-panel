@@ -68,7 +68,7 @@ const LoginPage = () => {
             <div className="flex flex-col md:flex-row md:items-center md:space-x-4 gap-3">
               {/* Logo box (white inside dark band) */}
               <div className="flex items-center justify-center w-20 h-12 rounded-xl bg-white">
-                <span className="text-indigo-900 font-bold text-lg">ADMIN</span>
+                <span className="text-indigo-900 font-bold text-lg">Swiftsub</span>
               </div>
 
               {/* Title + subtitle inside dark band */}
