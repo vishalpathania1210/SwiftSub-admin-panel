@@ -25,6 +25,8 @@ const Users = () => {
       return;
     }
     setLoading(true);
+    setError(null); // clear previous error before fetching
+  
     try {
       let response;
       const config = {
@@ -32,31 +34,40 @@ const Users = () => {
           Authorization: `Bearer ${token}`,
         },
       };
+  
       if (searchQuery.trim()) {
         response = await axios.get(
           `https://swift-sub-woad.vercel.app/v1/admin/searchUser?query=${searchQuery}`,
           config
-        )
+        );
       } else {
         response = await axios.get(
           "https://swift-sub-woad.vercel.app/v1/admin/getUserList",
           config
         );
       }
-
+  
       let data = response.data.users || response.data.data || response.data || [];
-      console.log("users fetching ",data)
       if (!Array.isArray(data)) data = [data];
-
+  
       setUsers(data);
     } catch (err) {
-      console.error(err);
-      setError(err);
+      console.error("Error fetching users:", err);
+  
+      // Extract message from API response if available
+      const apiMessage =
+        err.response?.data?.message ||
+        err.response?.data?.error ||
+        "Something went wrong";
+  
+      // Instead of breaking UI, show user-friendly message
+      setUsers([]); // clear old data if needed
+      setError(apiMessage); // store message in state
     } finally {
       setLoading(false);
     }
   };
-
+  
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -151,13 +162,15 @@ const Users = () => {
 
         {/* Table */}
         {loading ? (
-          <p className="text-gray-500">Loading users...</p>
-        ) : error ? (
-          <p className="text-red-500">Error: {error.message}</p>
-        ) : users.length === 0 ? (
-          <p className="text-gray-500">No users found.</p>
-        ) : (
-          <div className="overflow-x-auto rounded-xl shadow-lg border border-gray-200">
+  <p className="text-gray-500">Loading users...</p>
+) : error ? (
+  // ✅ CHANGE THIS LINE: error is a string, not an object
+  // Old: <p className="text-red-500">Error: {error.message}</p>
+  <p className="text-red-500 text-lg font-medium">{error}</p>
+) : users.length === 0 ? (
+  <p className="text-gray-500">No users found.</p>
+) : (
+  <div className="overflow-x-auto rounded-xl shadow-lg border border-gray-200">
             <table className="min-w-full bg-white">
               <thead className="bg-gray-100 text-gray-700">
                 <tr>
