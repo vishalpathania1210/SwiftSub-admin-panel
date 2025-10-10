@@ -86,8 +86,8 @@ const LoginPage = () => {
                 <label className="block text-gray-700 mb-1">Email</label>
                 <input
                   type="text"
-                  name="Email"
-                  placeholder="email"
+                  name="email"
+                  placeholder="Email"
                   className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 outline-none"
                   value={formik.values.email}
                   onChange={formik.handleChange}
@@ -104,7 +104,7 @@ const LoginPage = () => {
                 <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
-                    name="Password"
+                    name="password"
                     placeholder="Password"
                     className="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-400 outline-none"
                     value={formik.values.password}
