@@ -7,6 +7,7 @@ import axios from "axios";
 
 const Profile = () => {
   const userData = useSelector((state) => state.user.user);
+  const  token = useSelector((state) => state.user.accessToken);
 
   // State to store profile data
   const [formData, setFormData] = useState({
@@ -24,7 +25,12 @@ const Profile = () => {
     try {
       const response = await axios.get(
         "https://swift-sub-woad.vercel.app/v1/admin/adminProfile",
-        { params: { userId: userData.id } }
+        {
+          params: { userId: userData.id },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
       const user = response.data.user;
@@ -52,7 +58,7 @@ const Profile = () => {
   return (
     <div className="flex">
       <SideBar />
-      <div className="flex-1">
+      <div className="flex-1 p-6">
         <NavBar title="Admin Profile" />
 
         <div className="p-6">

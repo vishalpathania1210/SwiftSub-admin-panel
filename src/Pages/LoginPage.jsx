@@ -29,7 +29,8 @@ const LoginPage = () => {
           "https://swift-sub-woad.vercel.app/v1/auth/login",
           {
             email: values.email,
-            password: values.password,  
+            password: values.password,
+            roleType: "admin"  
           },
           {
             headers: {

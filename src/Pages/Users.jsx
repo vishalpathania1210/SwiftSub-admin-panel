@@ -4,6 +4,7 @@ import SideBar from "../Components/SideBar";
 import NavBar from "../Components/NavBar";
 import { toast } from "react-toastify";
 import { Trash2, X, Edit2 } from "lucide-react";
+import { useSelector } from "react-redux";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -16,33 +17,70 @@ const Users = () => {
   const [editUserId, setEditUserId] = useState(null); // For Edit modal
   const [editUserData, setEditUserData] = useState({ firstName: "", lastName: "" });
   const [updating, setUpdating] = useState(false);
-
+  const token = useSelector((state)=> state.user.accessToken)
   // Fetch users
   const fetchUsers = async () => {
+    if (!token) {
+      console.error("No token found");
+      return;
+    }
+  
     setLoading(true);
+    setError(null); // ✅ Reset error every time you search
+  
     try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+  
       let response;
       if (searchQuery.trim()) {
         response = await axios.get(
-          `https://swift-sub-woad.vercel.app/v1/admin/searchUser?query=${searchQuery}`
+          `https://swift-sub-woad.vercel.app/v1/admin/searchUser?query=${searchQuery}`,
+          config
         );
       } else {
         response = await axios.get(
-          "https://swift-sub-woad.vercel.app/v1/admin/getUserList"
+          "https://swift-sub-woad.vercel.app/v1/admin/getUserList",
+          config
         );
       }
-
-      let data = response.data.users || response.data.data || response.data || [];
-      if (!Array.isArray(data)) data = [data];
-
+  
+      // ✅ Defensive check
+      const resData = response.data;
+      let data = [];
+  
+      if (Array.isArray(resData.users)) {
+        data = resData.users;
+      } else if (Array.isArray(resData.data)) {
+        data = resData.data;
+      } else if (Array.isArray(resData)) {
+        data = resData;
+      } else if (resData.user) {
+        // sometimes single user object returned
+        data = [resData.user];
+      } else {
+        data = [];
+      }
+  
       setUsers(data);
     } catch (err) {
-      console.error(err);
-      setError(err);
+      console.error("Error fetching users:", err.response?.data || err.message);
+  
+      // ✅ Handle when API gives 404 or custom message
+      if (err.response?.status === 404 || err.response?.data?.message?.includes("not found")) {
+        setUsers([]); // show "No users found"
+        setError(null); // not a real error
+      } else {
+        setError(err);
+      }
     } finally {
       setLoading(false);
     }
   };
+  
 
   useEffect(() => {
     fetchUsers();
@@ -52,19 +90,28 @@ const Users = () => {
     const delay = setTimeout(() => {
       fetchUsers();
     }, 500);
+  
     return () => clearTimeout(delay);
   }, [searchQuery]);
-
+  
   // Delete user
   const confirmDeleteUser = (id) => setDeleteConfirmId(id);
+
 
   const handleDeleteUser = async () => {
     if (!deleteConfirmId) return;
     setDeleting(true);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+  
 
     try {
       await axios.delete(
-        `https://swift-sub-woad.vercel.app/v1/admin/deleteProfile?id=${deleteConfirmId}`
+        `https://swift-sub-woad.vercel.app/v1/admin/deleteProfile?id=${deleteConfirmId}`,
+        config
       );
       toast.success("User deleted successfully!");
       setDeleteConfirmId(null);
@@ -89,12 +136,16 @@ const Users = () => {
   const handleUpdateUser = async () => {
     if (!editUserId) return;
     setUpdating(true);
+    
 
     try {
       await axios.put(
         `https://swift-sub-woad.vercel.app/v1/admin/updateUserProfile?userId=${editUserId}`,
         editUserData,
-        { headers: { "Content-Type": "application/json" } }
+        {  headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        }, }
       );
       toast.success("User updated successfully!");
       setEditUserId(null);
