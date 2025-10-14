@@ -51,7 +51,7 @@ const NavBar = ({ title }) => {
 
     try {
       const response = await axios.post(
-        "https://swift-sub-woad.vercel.app/v1/auth/logout",
+        "https://swiftsub-psi.vercel.app/v1/auth/logout",
         {
           email: user?.email,
           refreshToken: tokenn

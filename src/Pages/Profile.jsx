@@ -24,7 +24,7 @@ const Profile = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        "https://swift-sub-woad.vercel.app/v1/admin/adminProfile",
+        "https://swiftsub-psi.vercel.app/v1/admin/adminProfile",
         {
           params: { userId: userData.id },
           headers: {

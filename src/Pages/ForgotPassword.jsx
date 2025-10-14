@@ -20,7 +20,7 @@ const ForgotPassword = () => {
     onSubmit:async (values, { resetForm }) => {
       setLoading(true);
       try {
-        const response = await axios.post("https://swift-sub-woad.vercel.app/v1/auth/forgot-password",
+        const response = await axios.post("https://swiftsub-psi.vercel.app/v1/auth/forgot-password",
         {
           email: values.email
         },

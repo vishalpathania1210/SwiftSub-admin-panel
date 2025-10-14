@@ -37,7 +37,7 @@ setForgotToken(token)
       setLoading(true);
       try {
         const response = await axios.post(
-          `https://swift-sub-woad.vercel.app/v1/auth/reset-password?token=${forgotToken}`,
+          `https://swiftsub-psi.vercel.app/v1/auth/reset-password?token=${forgotToken}`,
           {
             password: values.password,
             confirmNewPassword: values.confirmPassword,

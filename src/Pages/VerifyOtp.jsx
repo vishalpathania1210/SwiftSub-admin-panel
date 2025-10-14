@@ -27,7 +27,7 @@ const VerifyOtp = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `https://swift-sub-woad.vercel.app/v1/auth/verify-otp`,
+          `https://swiftsub-psi.vercel.app/v1/auth/verify-otp`,
           {
             params: {
               otp: values.otp,
