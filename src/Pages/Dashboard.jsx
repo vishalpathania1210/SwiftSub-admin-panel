@@ -13,7 +13,7 @@ import {
   Pie,
   Cell,
 } from "recharts";
-import { Users, UserPlus, Bell } from "lucide-react";
+import { Users, UserPlus, Bell, Activity } from "lucide-react";
 
 export default function Dashboard() {
   // Dummy data for Users graph
@@ -39,7 +39,8 @@ export default function Dashboard() {
   // Dummy stats
   const totalUsers = 3245;
   const newSignups = 128;
-  const notifications = 14; // new card value
+  const notifications = 14;
+  const activePercentage = 76; // for activity status card
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -48,7 +49,7 @@ export default function Dashboard() {
         <SideBar />
       </div>
 
-      {/* Main Content (Scrollable) */}
+      {/* Main Content */}
       <div className="flex-1 md:ml-64 flex flex-col bg-gray-50 min-h-screen overflow-y-auto">
         <NavBar title="Dashboard" />
 
@@ -85,17 +86,28 @@ export default function Dashboard() {
               </div>
             </div>
 
-            {/* Notifications Card */}
+            {/* Notifications */}
             <div className="relative overflow-hidden bg-gradient-to-br from-indigo-500 to-blue-600 text-white p-6 rounded-2xl shadow-lg hover:scale-[1.02] transition-all duration-300">
               <div className="flex justify-between items-center">
                 <div>
-                  <h2 className="text-sm font-medium opacity-90">
-                    Notifications
-                  </h2>
+                  <h2 className="text-sm font-medium opacity-90">Notifications</h2>
                   <p className="text-3xl font-bold mt-2">{notifications}</p>
                 </div>
-                <div className="bg-white/20 p-3 rounded-full relative">
+                <div className="bg-white/20 p-3 rounded-full">
                   <Bell size={30} />
+                </div>
+              </div>
+            </div>
+
+            {/* Activity Status */}
+            <div className="relative overflow-hidden bg-gradient-to-br from-purple-500 to-violet-600 text-white p-6 rounded-2xl shadow-lg hover:scale-[1.02] transition-all duration-300">
+              <div className="flex justify-between items-center">
+                <div>
+                  <h2 className="text-sm font-medium opacity-90">Activity Status</h2>
+                  <p className="text-3xl font-bold mt-2">{activePercentage}%</p>
+                </div>
+                <div className="bg-white/20 p-3 rounded-full">
+                  <Activity size={30} />
                 </div>
               </div>
             </div>
