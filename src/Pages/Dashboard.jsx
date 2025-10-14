@@ -83,23 +83,7 @@ export default function Dashboard() {
                   <UserPlus size={30} />
                 </div>
               </div>
-              <div className="flex items-center gap-2 mt-4 text-sm">
-                {newSignupChange >= 0 ? (
-                  <>
-                    <TrendingUp size={18} className="text-green-200" />
-                    <span className="text-green-100">
-                      +{newSignupChange}% this week
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    <TrendingDown size={18} className="text-red-200" />
-                    <span className="text-red-100">
-                      {newSignupChange}% this week
-                    </span>
-                  </>
-                )}
-              </div>
+               
             </div>
           </div>
 
