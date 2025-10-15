@@ -116,13 +116,12 @@ export default function Dashboard() {
           <button onClick={() => setSidebarOpen(true)}>
             <Menu size={28} />
           </button>
-          <h1 className="text-xl font-semibold">Dashboard</h1>
         </div>
 
-        {/* Existing Navbar for larger screens */}
-        <div className="hidden md:block">
+     
+     
           <NavBar title="Dashboard" />
-        </div>
+   
 
         {/* ====== DASHBOARD BODY ====== */}
         <div className="p-4 sm:p-6 lg:p-8 w-full">

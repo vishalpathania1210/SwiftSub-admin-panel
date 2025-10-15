@@ -95,13 +95,11 @@ const Profile = () => {
         <button onClick={() => setSidebarOpen(true)}>
           <Menu size={28} />
         </button>
-        <h1 className="text-xl font-semibold">Admin Profile</h1>
       </div>
 
-      {/* Existing Navbar for larger screens */}
-      <div className="hidden md:block">
+   
         <NavBar title="Admin Profile" />
-      </div>
+      
 
         <div className="p-6">
           <h1 className="text-2xl font-bold mb-6">My Profile</h1>

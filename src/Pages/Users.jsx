@@ -188,13 +188,12 @@ const Users = () => {
         <button onClick={() => setSidebarOpen(true)}>
           <Menu size={28} />
         </button>
-        <h1 className="text-xl font-semibold">Users</h1>
+   
       </div>
 
-      {/* Existing Navbar for larger screens */}
-      <div className="hidden md:block">
+
         <NavBar title="Users" />
-      </div>
+
         {/* Search bar - fixed */}
         <div className="p-6 bg-white z-10 flex justify-between items-center border-b border-gray-200">
           <input
