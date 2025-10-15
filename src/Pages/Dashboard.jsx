@@ -138,10 +138,10 @@ export default function Dashboard() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             {/* Total Users */}
             <div className="relative overflow-hidden bg-gradient-to-br from-[#F2632D] to-orange-500 text-white p-6 rounded-2xl shadow-lg hover:scale-[1.02] transition-all duration-300">
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center" onClick={() => navigate("/users")}  >
               <div
   
-  onClick={() => navigate("/users")} // Navigate to /users on click
+  // Navigate to /users on click
 >
   <h2 className="text-sm font-serif opacity-90">Total Users</h2>
   <p className="text-3xl font-bold mt-2">
