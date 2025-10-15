@@ -74,7 +74,7 @@ const LoginPage = () => {
               {/* Title + subtitle inside dark band */}
               <div>
                 <h2 className="text-2xl font-bold leading-tight">Welcome Back!</h2>
-                <p className="text-indigo-200 mt-1">Login in to continue</p>
+                <p className="text-indigo-200 font-serif mt-1">Login in to continue</p>
               </div>
             </div>
           </div>
@@ -84,7 +84,7 @@ const LoginPage = () => {
             <form className="space-y-5" onSubmit={formik.handleSubmit}>
               {/* Username */}
               <div>
-                <label className="block text-gray-700 mb-1">Email</label>
+                <label className="block text-gray-700 mb-1 font-serif">Email</label>
                 <input
                   type="text"
                   name="email"
@@ -101,7 +101,7 @@ const LoginPage = () => {
 
               {/* Password */}
               <div>
-                <label className="block text-gray-700 mb-1">Password</label>
+                <label className="block text-gray-700 font-serif mb-1">Password</label>
                 <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
@@ -131,7 +131,7 @@ const LoginPage = () => {
                 <button 
                 type="button"
                 onClick={()=>navigate('/ForgotPassword')}
-                className="text-indigo-500 hover:underline">
+                className="text-indigo-500 font-serif hover:underline">
                   Forgot Password?
                 </button>
               </div>
