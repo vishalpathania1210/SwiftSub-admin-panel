@@ -50,7 +50,6 @@ const LoginPage = () => {
       } catch (error) {
         console.error("Login failed:", error.response?.data || error.message);
         toast.error(error.response?.data?.message || "Invalid credentials");
-        resetForm();
       } finally {
         setLoading(false);
       }
