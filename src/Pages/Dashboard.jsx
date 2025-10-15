@@ -16,15 +16,19 @@ import {
 import { Users, UserPlus, Bell, Activity, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
   const [users, setUsers] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false); // 👈 NEW STATE
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
   const token = localStorage.getItem("accessToken");
 
   const fetchUsers = async () => {
     try {
+      setLoading(true)
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -46,6 +50,7 @@ export default function Dashboard() {
       }
 
       setUsers(data);
+      setLoading(false)
     } catch (err) {
       console.error("Error fetching users:", err);
       setUsers([]);
@@ -134,10 +139,15 @@ export default function Dashboard() {
             {/* Total Users */}
             <div className="relative overflow-hidden bg-gradient-to-br from-[#F2632D] to-orange-500 text-white p-6 rounded-2xl shadow-lg hover:scale-[1.02] transition-all duration-300">
               <div className="flex justify-between items-center">
-                <div>
-                  <h2 className="text-sm font-serif opacity-90">Total Users</h2>
-                  <p className="text-3xl font-bold mt-2">{users}</p>
-                </div>
+              <div
+  
+  onClick={() => navigate("/users")} // Navigate to /users on click
+>
+  <h2 className="text-sm font-serif opacity-90">Total Users</h2>
+  <p className="text-3xl font-bold mt-2">
+  {loading ? "Loading..." : users}
+  </p>
+</div>
                 <div className="bg-white/20 p-3 rounded-full">
                   <Users size={30} />
                 </div>
