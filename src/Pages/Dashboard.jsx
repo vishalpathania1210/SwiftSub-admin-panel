@@ -13,18 +13,17 @@ import {
   Pie,
   Cell,
 } from "recharts";
-import { Users, UserPlus, Bell, Activity } from "lucide-react";
+import { Users, UserPlus, Bell, Activity, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Dashboard() {
+  const [users, setUsers] = useState("");
+  const [sidebarOpen, setSidebarOpen] = useState(false); // 👈 NEW STATE
 
-  const [users, setUsers] =useState("")
-
-  const token = localStorage.getItem("accessToken")
+  const token = localStorage.getItem("accessToken");
 
   const fetchUsers = async () => {
-
     try {
       const config = {
         headers: {
@@ -32,41 +31,31 @@ export default function Dashboard() {
         },
       };
 
-      let response;
-
-    
-        response = await axios.get(
-          `https://swiftsub-psi.vercel.app/v1/Admin/getUserList?page=1&limit=3000000&sortBy=createdAt:desc`,
-          config
-        );
-       
+      let response = await axios.get(
+        `https://swiftsub-psi.vercel.app/v1/Admin/getUserList?page=1&limit=3000000&sortBy=createdAt:desc`,
+        config
+      );
 
       console.log("response of the user list", response.data);
 
-      // ✅ Extraction logic updated for new API response
       let data = [];
       if (response.data?.UserList?.totalResults) {
-        // getUserList API
         data = response.data.UserList.totalResults;
-      }   else {
+      } else {
         data = [];
       }
 
       setUsers(data);
     } catch (err) {
       console.error("Error fetching users:", err);
-      const apiMessage =
-        err.response?.data?.message ||
-        err.response?.data?.error ||
-        "Something went wrong while fetching users.";
       setUsers([]);
-    }  
+    }
   };
 
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
-  useEffect(()=>{fetchUsers()},[])
-
-  // Dummy data for Users graph
   const data = [
     { name: "Jan", Users: 120 },
     { name: "Feb", Users: 210 },
@@ -77,7 +66,6 @@ export default function Dashboard() {
     { name: "Jul", Users: 350 },
   ];
 
-  // Dummy data for Activity Status pie chart
   const activityData = [
     { name: "Active", value: 65 },
     { name: "Inactive", value: 25 },
@@ -85,24 +73,58 @@ export default function Dashboard() {
   ];
 
   const COLORS = ["#F2632D", "#16A34A", "#FDBA74"];
-
-  // Dummy stats
   const totalUsers = 3245;
   const newSignups = 128;
   const notifications = 14;
-  const activePercentage = 76; // for activity status card
+  const activePercentage = 76;
 
   return (
     <div className="flex h-screen overflow-hidden">
-      {/* Fixed Sidebar */}
+      {/* ====== SIDEBAR ====== */}
+      {/* Desktop Sidebar */}
       <div className="hidden md:block w-64 bg-white shadow-md fixed left-0 top-0 bottom-0 z-20">
         <SideBar />
       </div>
 
-      {/* Main Content */}
-      <div className="flex-1 md:ml-64 flex flex-col bg-gray-50 min-h-screen overflow-y-auto">
-        <NavBar title="Dashboard" />
+      {/* Mobile Sidebar (Slide-in) */}
+      <div
+        className={`fixed inset-y-0 left-0 w-64 bg-white shadow-md z-30 transform transition-transform duration-300 md:hidden ${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="flex justify-between items-center p-4 text-white pt- bg-indigo-600">
+          <h2 className="text-lg font-bold">Swiftsub</h2>
+          <button onClick={() => setSidebarOpen(false)}>
+            <X size={24} />
+          </button>
+        </div>
+        <SideBar />
+      </div>
 
+      {/* Overlay for mobile sidebar */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black opacity-40 z-20 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+        ></div>
+      )}
+
+      {/* ====== MAIN CONTENT ====== */}
+      <div className="flex-1 md:ml-64 flex flex-col bg-gray-50 min-h-screen overflow-y-auto relative">
+        {/* Mobile Navbar Toggle Button */}
+        <div className="md:hidden p-4 flex justify-between items-center bg-white shadow-sm sticky top-0 z-10">
+          <button onClick={() => setSidebarOpen(true)}>
+            <Menu size={28} />
+          </button>
+          <h1 className="text-xl font-semibold">Dashboard</h1>
+        </div>
+
+        {/* Existing Navbar for larger screens */}
+        <div className="hidden md:block">
+          <NavBar title="Dashboard" />
+        </div>
+
+        {/* ====== DASHBOARD BODY ====== */}
         <div className="p-4 sm:p-6 lg:p-8 w-full">
           <h1 className="text-2xl sm:text-3xl font-bold mb-8 text-gray-800">
             Welcome to Admin Dashboard
@@ -153,7 +175,9 @@ export default function Dashboard() {
             <div className="relative overflow-hidden bg-gradient-to-br from-purple-500 to-violet-600 text-white p-6 rounded-2xl shadow-lg hover:scale-[1.02] transition-all duration-300">
               <div className="flex justify-between items-center">
                 <div>
-                  <h2 className="text-sm font-medium opacity-90">Activity Status</h2>
+                  <h2 className="text-sm font-medium opacity-90">
+                    Activity Status
+                  </h2>
                   <p className="text-3xl font-bold mt-2">{activePercentage}%</p>
                 </div>
                 <div className="bg-white/20 p-3 rounded-full">
@@ -163,9 +187,8 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Charts Section */}
+          {/* Charts */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Users Growth Graph */}
             <div className="p-6 bg-white shadow-md rounded-2xl h-[350px] sm:h-[400px]">
               <h2 className="text-xl font-semibold mb-4 text-gray-800">
                 New Sign Up
@@ -189,7 +212,6 @@ export default function Dashboard() {
               </ResponsiveContainer>
             </div>
 
-            {/* Activity Status Pie Chart */}
             <div className="p-6 bg-white shadow-md rounded-2xl h-[350px] sm:h-[400px] flex flex-col items-center justify-center">
               <h2 className="text-xl font-semibold mb-4 text-gray-800">
                 User Activity Status

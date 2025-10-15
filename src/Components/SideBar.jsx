@@ -23,20 +23,22 @@ const SideBar = () => {
           } bg-indigo-600 text-white h-screen p-4 pt-8 relative duration-300`}
         >
           {/* Toggle button */}
-          <button
-            className="absolute -right-3 top-9 w-6 h-6 bg-white text-indigo-600 rounded-full flex items-center justify-center shadow"
-            onClick={() => setOpen(!open)}
-          >
-            <Menu size={16} />
-          </button>
+         {/* Toggle button */}
+{/* <button
+  className="absolute -right-3 top-9 w-6 h-6 bg-white text-indigo-600 rounded-full flex items-center justify-center shadow
+             hidden md:flex" // 👈 hide on small screens, show on md+
+  onClick={() => setOpen(!open)}
+>
+  <Menu size={16} />
+</button> */}
 
-          <h1
-            className={`text-xl font-bold mb-6 ${
-              !open && "scale-0"
-            } duration-200`}
-          >
-            Swiftsub
-          </h1>
+<h1
+  className={`text-xl font-bold mb-6 ${
+    !open && "scale-0"
+  } duration-200 hidden md:block`} // 👈 hide on small screens, show on md+
+>
+  Swiftsub
+</h1>
 
           <ul className="space-y-4">
             {menus.map((menu, i) => (
@@ -71,9 +73,6 @@ const SideBar = () => {
           </ul>
         </div>
       </div>
-
-      {/* Logout Confirmation Modal */}
-   
     </>
   );
 };
