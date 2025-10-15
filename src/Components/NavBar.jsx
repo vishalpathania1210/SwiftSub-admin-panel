@@ -102,21 +102,21 @@ const NavBar = ({ title }) => {
               <button
                 type="button"
                 onClick={() => navigate("/Profile")}
-                className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 transition active:scale-95 duration-300"
+                className="block w-full font-serif text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 transition active:scale-95 duration-300"
               >
                 Profile
               </button>
               <button
                 type="button"
                 onClick={() => navigate("/ForgotPassword")}
-                className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 transition active:scale-95 duration-300 "
+                className="block w-full font-serif text-left px-4 py-2 text-gray-700 hover:bg-indigo-50 transition active:scale-95 duration-300 "
               >
                 Forgot Password
               </button>
               <button
                 type="button"
                 onClick={() => setShowLogoutModal(true)}
-                className="block w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 transition active:scale-95 duration-300"
+                className="block w-full font-serif text-left px-4 py-2 text-red-600 hover:bg-red-50 transition active:scale-95 duration-300"
               >
                 Log Out
               </button>

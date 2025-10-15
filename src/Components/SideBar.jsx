@@ -57,7 +57,7 @@ const SideBar = () => {
                   <NavLink
                     to={menu.link}
                     className={({ isActive }) =>
-                      `flex items-center gap-3 p-2 rounded-md cursor-pointer 
+                      `flex items-center gap-3 p-2  font-serif rounded-md cursor-pointer 
                        hover:bg-indigo-500 duration-200 
                        ${isActive ? "bg-indigo-700" : ""}`
                     }

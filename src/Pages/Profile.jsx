@@ -112,7 +112,7 @@ const Profile = () => {
             <div className="bg-white shadow rounded-lg p-6 max-w-2xl space-y-6">
               {/* Name */}
               <div>
-                <p className="text-sm font-medium text-gray-500">Full Name</p>
+                <p className="text-sm font-serif text-gray-500">Full Name</p>
                 <p className="mt-1 text-lg font-semibold text-gray-800">
                   {formData.name || "N/A"}
                 </p>
@@ -120,7 +120,7 @@ const Profile = () => {
 
               {/* Email */}
               <div>
-                <p className="text-sm font-medium text-gray-500">Email</p>
+                <p className="text-sm font-serif text-gray-500">Email</p>
                 <p className="mt-1 text-lg font-semibold text-gray-800">
                   {formData.email || "N/A"}
                 </p>
@@ -136,7 +136,7 @@ const Profile = () => {
 
               {/* Role */}
               <div>
-                <p className="text-sm font-medium text-gray-500">Role</p>
+                <p className="text-sm font-serif text-gray-500">Role</p>
                 <p className="mt-1 text-lg font-semibold text-indigo-600">
                   {formData.role}
                 </p>

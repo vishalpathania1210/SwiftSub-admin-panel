@@ -212,17 +212,17 @@ const Users = () => {
           ) : error ? (
             <p className="text-red-500 text-lg font-medium">{error}</p>
           ) : users.length === 0 ? (
-            <p className="text-gray-500">No users found.</p>
+            <p className="text-black">No users found.</p>
           ) : (
             <div className="overflow-x-auto rounded-xl shadow-lg border border-gray-200">
               <table className="min-w-full bg-white">
-                <thead className="bg-gray-100 text-gray-700 sticky top-0 z-20">
+                <thead className="bg-gray-100 text-black sticky top-0 z-20">
                   <tr>
-                    <th className="py-3 px-4 border-b text-left">Sr. No.</th>
-                    <th className="py-3 px-4 border-b text-left">First Name</th>
-                    <th className="py-3 px-4 border-b text-left">Last Name</th>
-                    <th className="py-3 px-4 border-b text-left">Email</th>
-                    <th className="py-3 px-4 border-b text-center">Actions</th>
+                    <th className="py-3 px-4 border-b text-left font-serif">Sr. No.</th>
+                    <th className="py-3 px-4 border-b text-left font-serif">First Name</th>
+                    <th className="py-3 px-4 border-b text-left font-serif">Last Name</th>
+                    <th className="py-3 px-4 border-b text-left font-serif">Email</th>
+                    <th className="py-3 px-4 border-b text-center font-serif">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -231,10 +231,10 @@ const Users = () => {
                       key={user._id || user.id || index}
                       className="hover:bg-gray-50 transition"
                     >
-                      <td className="py-3 px-4 border-b">{index + 1}</td>
-                      <td className="py-3 px-4 border-b">{user.firstName || "N/A"}</td>
-                      <td className="py-3 px-4 border-b">{user.lastName || "N/A"}</td>
-                      <td className="py-3 px-4 border-b">{user.email}</td>
+                      <td className="py-3 px-4 border-b font-serif">{index + 1}</td>
+                      <td className="py-3 px-4 border-b font-serif">{user.firstName || "N/A"}</td>
+                      <td className="py-3 px-4 border-b font-serif">{user.lastName || "N/A"}</td>
+                      <td className="py-3 px-4 border-b font-serif">{user.email}</td>
                       <td className="py-3 px-4 border-b text-center flex justify-center gap-3">
                         <button
                           title="Edit"

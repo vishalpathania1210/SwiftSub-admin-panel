@@ -135,7 +135,7 @@ export default function Dashboard() {
             <div className="relative overflow-hidden bg-gradient-to-br from-[#F2632D] to-orange-500 text-white p-6 rounded-2xl shadow-lg hover:scale-[1.02] transition-all duration-300">
               <div className="flex justify-between items-center">
                 <div>
-                  <h2 className="text-sm font-medium opacity-90">Total Users</h2>
+                  <h2 className="text-sm font-serif opacity-90">Total Users</h2>
                   <p className="text-3xl font-bold mt-2">{users}</p>
                 </div>
                 <div className="bg-white/20 p-3 rounded-full">
@@ -148,7 +148,7 @@ export default function Dashboard() {
             <div className="relative overflow-hidden bg-gradient-to-br from-green-500 to-emerald-600 text-white p-6 rounded-2xl shadow-lg hover:scale-[1.02] transition-all duration-300">
               <div className="flex justify-between items-center">
                 <div>
-                  <h2 className="text-sm font-medium opacity-90">New Signups</h2>
+                  <h2 className="text-sm font-serif opacity-90">New Signups</h2>
                   <p className="text-3xl font-bold mt-2">{newSignups}</p>
                 </div>
                 <div className="bg-white/20 p-3 rounded-full">
@@ -161,7 +161,7 @@ export default function Dashboard() {
             <div className="relative overflow-hidden bg-gradient-to-br from-indigo-500 to-blue-600 text-white p-6 rounded-2xl shadow-lg hover:scale-[1.02] transition-all duration-300">
               <div className="flex justify-between items-center">
                 <div>
-                  <h2 className="text-sm font-medium opacity-90">Notifications</h2>
+                  <h2 className="text-sm font-serif opacity-90">Notifications</h2>
                   <p className="text-3xl font-bold mt-2">{notifications}</p>
                 </div>
                 <div className="bg-white/20 p-3 rounded-full">
@@ -174,7 +174,7 @@ export default function Dashboard() {
             <div className="relative overflow-hidden bg-gradient-to-br from-purple-500 to-violet-600 text-white p-6 rounded-2xl shadow-lg hover:scale-[1.02] transition-all duration-300">
               <div className="flex justify-between items-center">
                 <div>
-                  <h2 className="text-sm font-medium opacity-90">
+                  <h2 className="text-sm font-serif opacity-90">
                     Activity Status
                   </h2>
                   <p className="text-3xl font-bold mt-2">{activePercentage}%</p>
@@ -189,7 +189,7 @@ export default function Dashboard() {
           {/* Charts */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="p-6 bg-white shadow-md rounded-2xl h-[350px] sm:h-[400px]">
-              <h2 className="text-xl font-semibold mb-4 text-gray-800">
+              <h2 className="text-xl font-serif mb-4 text-gray-800">
                 New Sign Up
               </h2>
               <ResponsiveContainer width="100%" height="100%">
@@ -212,7 +212,7 @@ export default function Dashboard() {
             </div>
 
             <div className="p-6 bg-white shadow-md rounded-2xl h-[350px] sm:h-[400px] flex flex-col items-center justify-center">
-              <h2 className="text-xl font-semibold mb-4 text-gray-800">
+              <h2 className="text-xl font-serif  mb-4 text-gray-800">
                 User Activity Status
               </h2>
               <ResponsiveContainer width="100%" height="100%">

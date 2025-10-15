@@ -53,7 +53,7 @@ navigate('/VerifyOtp')
     <h2 className="text-3xl font-bold text-center mb-3 text-gray-800">
       Forgot Password
     </h2>
-    <p className="text-center text-gray-600 mb-6">
+    <p className="text-center font-serif text-gray-600 mb-6">
       Enter your registered email address. <br />
       We will send you an OTP to reset your password.
     </p>
@@ -62,7 +62,7 @@ navigate('/VerifyOtp')
       {/* Email Input */}
       <div>
         <label
-          className="block text-sm font-medium text-gray-700 mb-1"
+          className="block text-sm font-serif text-gray-700 mb-1"
         >
           Email
         </label>
@@ -90,7 +90,7 @@ navigate('/VerifyOtp')
       <button
         type="submit"
         disabled={loading}
-        className={`w-full flex items-center justify-center bg-indigo-500 text-white font-semibold py-3 rounded-xl text-lg transition ${
+        className={`w-full flex items-center justify-center bg-indigo-500 text-white font-serif py-3 rounded-xl text-lg transition ${
           loading
             ? "opacity-70 cursor-not-allowed"
             : "hover:bg-indigo-600 active:scale-95"
@@ -105,9 +105,9 @@ navigate('/VerifyOtp')
     </form>
 
     {/* Back to Login */}
-    <p className="mt-6 text-center text-gray-600 text-sm">
+    <p className="mt-6 text-center font-serif text-gray-600 text-sm">
       Remembered your password?{" "}
-      <button    onClick={() => navigate('/login')} className="text-indigo-500 font-medium hover:underline">
+      <button    onClick={() => navigate('/login')} className="text-indigo-500 font-serif hover:underline">
         Back to Login
       </button>
     </p>
