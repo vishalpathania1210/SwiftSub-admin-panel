@@ -140,8 +140,6 @@ export default function Dashboard() {
             <div className="relative overflow-hidden bg-gradient-to-br from-[#F2632D] to-orange-500 text-white p-6 rounded-2xl shadow-lg hover:scale-[1.02] transition-all duration-300">
               <div className="flex justify-between items-center" onClick={() => navigate("/users")}  >
               <div
-  
-  // Navigate to /users on click
 >
   <h2 className="text-sm font-serif opacity-90">Total Users</h2>
   <p className="text-3xl font-bold mt-2">
