@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Profile = () => {
-  const userData = useSelector((state) => state.user.user);
-  const  token = useSelector((state) => state.user.accessToken);
+  const userData = JSON.parse(localStorage.getItem("User"));
+  const  token = localStorage.getItem("accessToken")
 
   // State to store profile data
   const [formData, setFormData] = useState({
