@@ -14,8 +14,58 @@ import {
   Cell,
 } from "recharts";
 import { Users, UserPlus, Bell, Activity } from "lucide-react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Dashboard() {
+
+  const [users, setUsers] =useState("")
+
+  const token = localStorage.getItem("accessToken")
+
+  const fetchUsers = async () => {
+
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      let response;
+
+    
+        response = await axios.get(
+          `https://swiftsub-psi.vercel.app/v1/Admin/getUserList?page=1&limit=3000000&sortBy=createdAt:desc`,
+          config
+        );
+       
+
+      console.log("response of the user list", response.data);
+
+      // ✅ Extraction logic updated for new API response
+      let data = [];
+      if (response.data?.UserList?.totalResults) {
+        // getUserList API
+        data = response.data.UserList.totalResults;
+      }   else {
+        data = [];
+      }
+
+      setUsers(data);
+    } catch (err) {
+      console.error("Error fetching users:", err);
+      const apiMessage =
+        err.response?.data?.message ||
+        err.response?.data?.error ||
+        "Something went wrong while fetching users.";
+      setUsers([]);
+    }  
+  };
+
+
+  useEffect(()=>{fetchUsers()},[])
+
   // Dummy data for Users graph
   const data = [
     { name: "Jan", Users: 120 },
@@ -65,7 +115,7 @@ export default function Dashboard() {
               <div className="flex justify-between items-center">
                 <div>
                   <h2 className="text-sm font-medium opacity-90">Total Users</h2>
-                  <p className="text-3xl font-bold mt-2">{totalUsers}</p>
+                  <p className="text-3xl font-bold mt-2">{users}</p>
                 </div>
                 <div className="bg-white/20 p-3 rounded-full">
                   <Users size={30} />
