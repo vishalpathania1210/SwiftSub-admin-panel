@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import SideBar from '../Components/SideBar'
 import NavbarTabs from '../Components/NavbarTabs'
 import NavBar from '../Components/NavBar'
-import { Menu, X, ChevronDown, Eye, Check, X as XIcon } from "lucide-react";
+import { Menu, X, ChevronDown, Eye, Check, X as XIcon, AlertTriangle } from "lucide-react";
 import { Ban } from "lucide-react";
 
 const Providers = () => {
@@ -85,13 +85,14 @@ const Providers = () => {
                         {/* Pending Applications Section */}
                         <div className="bg-white overflow-hidden">
                             {/* Section Header */}
-                            <div className="flex justify-between items-center p-6 border-b border-gray-200">
+                            <div className="flex justify-between items-center p-6">
                                 <h2 className="text-xl font-semibold text-gray-700">Provider Management</h2>
                             </div>
                             
                             {/* Pending Applications Subheader */}
                             <div className="px-6 py-4 bg-gray-50 border rounded-xl border-gray-300">
                                 <div className="flex items-center gap-2">
+                                    <AlertTriangle size={18} className='text-[rgb(255,204,0)]' />
                                     <h3 className="text-base font-normal text-gray-800">Pending Applications (2)</h3>
                                 </div>
                        

@@ -9,11 +9,11 @@ const Revenue = () => {
     
     const revenueData = [
         { month: "Jan 2024", providerFees: "$15,600", userSubscriptions: "$23,400", totalRevenue: "$39,000", growth: "--" },
-        { month: "Feb 2024", providerFees: "$18,200", userSubscriptions: "$28,100", totalRevenue: "$46,300", growth: "~+18.7%" },
-        { month: "Mar 2024", providerFees: "$21,800", userSubscriptions: "$32,600", totalRevenue: "$54,400", growth: "~+17.5%" },
-        { month: "Apr 2024", providerFees: "$24,500", userSubscriptions: "$38,200", totalRevenue: "$62,700", growth: "~+15.3%" },
-        { month: "May 2024", providerFees: "$27,300", userSubscriptions: "$42,800", totalRevenue: "$70,100", growth: "~+11.8%" },
-        { month: "Jun 2024", providerFees: "$30,100", userSubscriptions: "$47,500", totalRevenue: "$77,600", growth: "~+10.7%" }
+        { month: "Feb 2024", providerFees: "$18,200", userSubscriptions: "$28,100", totalRevenue: "$46,300", growth: "+18.7%" },
+        { month: "Mar 2024", providerFees: "$21,800", userSubscriptions: "$32,600", totalRevenue: "$54,400", growth: "+17.5%" },
+        { month: "Apr 2024", providerFees: "$24,500", userSubscriptions: "$38,200", totalRevenue: "$62,700", growth: "+15.3%" },
+        { month: "May 2024", providerFees: "$27,300", userSubscriptions: "$42,800", totalRevenue: "$70,100", growth: "+11.8%" },
+        { month: "Jun 2024", providerFees: "$30,100", userSubscriptions: "$47,500", totalRevenue: "$77,600", growth: "+10.7%" }
     ];
 
     return (
@@ -125,7 +125,10 @@ const Revenue = () => {
                                                 <td className="py-2 px-6 text-[14px] text-gray-900 border-b border-gray-300">{row.providerFees}</td>
                                                 <td className="py-2 px-6 text-[14px] text-gray-900 border-b border-gray-300">{row.userSubscriptions}</td>
                                                 <td className="py-2 px-6 font-bold text-[14px] text-gray-900 border-b border-gray-300">{row.totalRevenue}</td>
-                                                <td className="py-2 px-6 text-[14px] text-green-600 border-b border-gray-300">{row.growth}</td>
+                                                <td className="py-2 px-6 text-[14px] text-green-600 border-b border-gray-300 flex items-center gap-1">
+  <TrendingUp size={12} />
+  {row.growth}
+</td>
                                             </tr>
                                         ))}
                                     </tbody>

@@ -138,21 +138,21 @@ const Overview = () => {
   <h2 className="text-lg font-normal mb-4">Quick Actions</h2>
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
     {/* Review Applications */}
-    <div className="border border-gray-300 rounded-xl px-4 text-center flex flex-col items-center gap-2 hover:bg-gray-300">
+    <div className="border border-gray-300 rounded-xl px-4 py-1 text-center flex flex-col items-center gap-2 hover:bg-gray-300">
       <UserGroupIcon className="h-6 w-6 text-gray-500" />
       <p className="font-normal">Review Applications</p>
       <span className="bg-yellow-400 text-xs px-3 py-1 text-black rounded-lg font-semibold">2</span>
     </div>
 
     {/* Generate Report */}
-    <div className="border  border-gray-300 rounded-xl px-4 text-center flex flex-col items-center gap-2 hover:bg-gray-300">
+    <div className="border  border-gray-300 rounded-xl px-4 py-1 text-center flex flex-col items-center gap-2 hover:bg-gray-300">
       <ChartBarIcon className="h-6 w-6 text-gray-500" />
       <p className="font-normal">Generate Report</p>
     
     </div>
 
     {/* Platform Settings */}
-    <div className="border border-gray-300 rounded-xl px-4 text-center flex flex-col items-center gap-2 hover:bg-gray-300">
+    <div className="border border-gray-300 rounded-xl px-4 py-1 text-center flex flex-col items-center gap-2 hover:bg-gray-300">
       <Cog6ToothIcon className="h-6 w-6 text-gray-500" />
       <p className="font-normal">Platform Settings</p>
      
