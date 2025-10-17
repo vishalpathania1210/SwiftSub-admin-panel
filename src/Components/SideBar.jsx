@@ -9,12 +9,13 @@ const SideBar = () => {
   const menus = [
     { name: "Dashboard", icon: <Home size={20} />, link: "/Dashboard" },
     { name: "Users", icon: <Users size={20} />, link: "/users" },
+    { name: "Overview", icon: <Home size={20} />, link: "/Overview" },
     { name: "Settings", icon: <Settings size={20} />, link: "/settings" },
   ];
 
 
   return (
-    <>
+    <>   
       <div className="flex">
         {/* Sidebar */}
         <div

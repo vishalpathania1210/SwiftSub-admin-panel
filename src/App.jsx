@@ -7,6 +7,10 @@ import ResetPassword from "./Pages/ResetPassword";
 import Dashboard from "./Pages/Dashboard";
 import Profile from "./Pages/Profile";
 import Users from "./Pages/Users";
+import Overview from "./Pages/Overview";
+import Providers from "./Pages/Providers";
+import Revenue from "./Pages/Revenue";
+
 // jkshdguirdfb gvawrfs
 const App = () => {
   return (
@@ -22,6 +26,9 @@ const App = () => {
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path="/users" element={<Users />} />
+          <Route path="/Overview" element={<Overview />} />
+          <Route path="/Providers" element={<Providers />} />
+          <Route path="/Revenue" element={<Revenue />} />
         </Routes>
       </Router>
     </>
