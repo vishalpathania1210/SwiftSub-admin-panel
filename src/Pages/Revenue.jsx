@@ -125,10 +125,7 @@ const Revenue = () => {
                                                 <td className="py-2 px-6 text-[14px] text-gray-900 border-b border-gray-300">{row.providerFees}</td>
                                                 <td className="py-2 px-6 text-[14px] text-gray-900 border-b border-gray-300">{row.userSubscriptions}</td>
                                                 <td className="py-2 px-6 font-bold text-[14px] text-gray-900 border-b border-gray-300">{row.totalRevenue}</td>
-                                                <td className="py-2 px-6 text-[14px] text-green-600 border-b border-gray-300 flex items-center gap-1">
-  <TrendingUp size={12} />
-  {row.growth}
-</td>
+                                                <td className="py-2 px-6 text-[14px] text-green-600 border-b border-gray-300 flex items-center gap-1"><TrendingUp size={12} />{row.growth}</td>
                                             </tr>
                                         ))}
                                     </tbody>
